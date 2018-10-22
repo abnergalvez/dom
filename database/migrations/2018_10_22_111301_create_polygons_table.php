@@ -15,6 +15,9 @@ class CreatePolygonsTable extends Migration
     {
         Schema::create('polygons', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('code');
+            $table->string('path');
+            $table->integer('area_id');
             $table->timestamps();
         });
     }
