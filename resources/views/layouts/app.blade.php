@@ -11,7 +11,16 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
+    
+
+    
+    <link rel="stylesheet" href="/assets/plugins/leaflet_awesome/leaflet.awesome-markers.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+
 </head>
 <body>
     <div id="app">
@@ -29,7 +38,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                       P.R.C - Rancagua
                     </a>
                 </div>
 
@@ -75,6 +84,21 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="/assets/plugins/jquery.min.js" type="text/javascript"></script>
+    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+    <script src="/assets/plugins/leaflet_awesome/leaflet.awesome-markers.js"></script>
+     <script type="text/javascript">
+        map2 = new L.map('map');
+        var osmUrl='http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png';
+        var osmAttrib='Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
+        var osm = new L.TileLayer(osmUrl, {minZoom: 1, maxZoom: 20, attribution: osmAttrib});
+
+        // start the map in South-East England
+        map2.setView(new L.LatLng(-34.1593915,-70.7738044),12);
+        map2.addLayer(osm);
+        var marker = L.marker([-34.1593915,-70.7738044],{draggable: false}).addTo(map2).bindPopup('Aqui Esta!').openPopup();
+        var popup = L.popup();
+        </script>
+        <script href="{{ asset('js/app.js') }}" type="text/javascript"></script>
 </body>
 </html>

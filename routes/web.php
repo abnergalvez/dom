@@ -17,9 +17,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::post('/buscar_prc','PublicController@searchMap')->name('seachmap');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['middleware' => 'auth'], function () {
         Route::resource('/poligons','PoligonController');
+        Route::resource('/areas','AreaController');
         Route::get('/account', 'HomeController@index')->name('home');
 });
 

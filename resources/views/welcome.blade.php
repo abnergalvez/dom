@@ -9,6 +9,7 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
         <!-- Styles -->
         <style>
@@ -46,7 +47,7 @@
             }
 
             .title {
-                font-size: 84px;
+                font-size: 20px;
             }
 
             .links > a {
@@ -78,15 +79,26 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    <img src="/img/munilogo.png" alt="" style="height: 140px;"><br>
+                    <small>Plan Regulador Comunal</small>
                 </div>
-
+                
                 <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="input-group">
+                      <form action="{{ route('seachmap') }}" method="POST">
+                       {{ csrf_field() }}
+                          <span class="input-group-btn">
+                            <button class="btn btn-default" type="submit" title="Buscar por Dirección">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                            </button>
+                          </span>
+                          <input type="text" class="form-control" placeholder="Ingresa Dirección..." title="Buscar por Dirección">
+                        </form>
+                    </div><!-- /input-group -->
+                  </div><!-- /.col-lg-6 -->
+                </div><!-- /.row -->
                 </div>
             </div>
         </div>
