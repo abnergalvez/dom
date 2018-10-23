@@ -74,6 +74,7 @@
     <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
     <script src="/assets/plugins/leaflet_awesome/leaflet.awesome-markers.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="/js/SimpleStarRating.js"></script>
      <script type="text/javascript">
         var ratings = document.getElementsByClassName('rating');
@@ -114,7 +115,20 @@
         });
         function groundDetails(zone)
         {
-            alert(zone);
+            $.ajax({
+            url:'api/ground_details/'+zone,
+            headers: {'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
+            method: 'GET',
+            success: function(data){
+                if(data){
+                $('#area_name').html(data.code);
+                $('#area_grounds').css('display','block');    
+                $('#ground_allowed').html(data.ground_allowed);
+                $('#ground_not_allowed').html(data.ground_not_allowed);
+                $('#suelos').modal('show');
+                }
+            }
+            });
         }
         </script>
         <script href="{{ asset('js/app.js') }}" type="text/javascript"></script>

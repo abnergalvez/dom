@@ -22,7 +22,9 @@
     </div>
     <hr>
     <div class="row">
+
     	<div class="col-md-12" >
+            <div class="col-md-12" >
     		<form action="/rating_comment" method="post">
 			{{ csrf_field() }}
     		¿Que tan util fue la información?<br><span class="rating"></span>  <strong id="rating_total" style="font-size: 15px;"></strong>  / 5
@@ -36,12 +38,30 @@
     		</div>
 
     		</form>
+            </div>
     	</div>
-    	<div class="col-md-12" >
-    		
-    	</div>
+
 
     </div>
 </div>
+
+       <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" id="suelos">
+             <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                         <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">ZONA : <span class="label label-primary" id="area_name"></span></h4>
+      </div>
+              <div class="modal-body">
+                    <h4>Suelos Permitidos</h4>
+                    <span id="ground_allowed"></span>
+                    <h4>Suelos No Permitidos</h4>
+                    <span id="ground_not_allowed"></span>
+              </div>  
+            </div>
+          </div>
+        </div>
+
+
     
 @endsection

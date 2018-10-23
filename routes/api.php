@@ -16,3 +16,7 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/ground_details/{code}',function ($code){
+	return \App\Area::where('code',$code)->first();
+});

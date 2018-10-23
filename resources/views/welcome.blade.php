@@ -93,7 +93,7 @@
                                 <i class="fa fa-search" aria-hidden="true"></i>
                             </button>
                           </span>
-                          <input type="text" class="form-control" placeholder="Ingresa Dirección..." title="Buscar por Dirección">
+                          <input type="text" name="address" class="form-control" placeholder="Ingresa Dirección..." title="Buscar por Dirección">
                         </form>
                     </div><!-- /input-group -->
                   </div><!-- /.col-lg-6 -->
