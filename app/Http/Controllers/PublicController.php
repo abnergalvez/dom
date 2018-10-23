@@ -10,4 +10,10 @@ class PublicController extends Controller
     {
     	return view('general_map');
     }
+
+    public function ratingComment(Request $request)
+    {
+    	$comment = \App\Comment::create($request->all());
+    	return redirect('/');
+    }
 }

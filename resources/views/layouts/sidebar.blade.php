@@ -28,6 +28,12 @@
               <p>Areas</p>
             </a>
           </li>
+          <li class="nav-item {{ Request::is('comments*') ? 'active':'' }}">
+            <a class="nav-link" href="/comments">
+              <i class="material-icons">comment</i>
+              <p>Comentarios</p>
+            </a>
+          </li>
           <li class="nav-item {{ Request::is('account*') ? 'active':'' }}">
             <a class="nav-link" href="/account">
               <i class="material-icons">person</i>
