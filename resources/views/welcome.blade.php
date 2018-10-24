@@ -93,6 +93,7 @@
                                 <i class="fa fa-search" aria-hidden="true"></i>
                             </button>
                           </span>
+                          <input type="hidden" name="place" value="welcome">
                           <input type="text" name="address" class="form-control" placeholder="Ingresa Dirección..." title="Buscar por Dirección">
                         </form>
                     </div><!-- /input-group -->
@@ -101,5 +102,10 @@
                 </div>
             </div>
         </div>
+        @if(Session::has('message'))
+        <script>
+            alert('{{ Session::get('message') }}');
+        </script>
+        @endif
     </body>
 </html>

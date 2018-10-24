@@ -68,51 +68,12 @@
 
         @yield('content')
     </div>
-
+@section('scripts')
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-2.2.3.js"></script>
-    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
-    <script src="/assets/plugins/leaflet_awesome/leaflet.awesome-markers.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="/js/SimpleStarRating.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    
      <script type="text/javascript">
-        var ratings = document.getElementsByClassName('rating');
-            for (var i = 0; i < ratings.length; i++) {
-                var r = new SimpleStarRating(ratings[i]);
-                ratings[i].addEventListener('rate', function(e) {
-                    $('#rating_total').html(e.detail);
-                    $('#rating_input').val(e.detail);
-                    console.log('Rating: ' + e.detail);
-                });
-        }
-
-        map2 = new L.map('map');
-        var osmUrl='http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png';
-        var osmAttrib='Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
-        var osm = new L.TileLayer(osmUrl, {minZoom: 1, maxZoom: 20, attribution: osmAttrib});
-
-        map2.setView(new L.LatLng(-34.1593915,-70.7738044),12);
-        map2.addLayer(osm);
-        //var marker = L.marker([-34.1593915,-70.7738044],{draggable: false}).addTo(map2);
-        var popup = L.popup();
-        
-        $.getJSON("map-out.json",function(data){
-
-        // add GeoJSON layer to the map once the file is loaded
-        var datalayer = L.geoJson(data ,{
-        onEachFeature: function(feature, featureLayer) {
-            if(feature.properties.zona_prc){
-                featureLayer.bindPopup(feature.properties.zona_prc +'<br>'+feature.properties.descrip+'<br><br><button class="btn btn-success btn-sm" onclick="groundDetails(\''+feature.properties.zona_prc+'\');"> Ver Detalle de Suelos </button>');
-            }
-            else{
-                featureLayer.bindPopup('No existen datos en esta zona');
-            }
-        }
-
-        }).addTo(map2);
-        map2.fitBounds(datalayer.getBounds());
-        });
         function groundDetails(zone)
         {
             $.ajax({
@@ -131,6 +92,7 @@
             });
         }
         </script>
-        <script href="{{ asset('js/app.js') }}" type="text/javascript"></script>
+        <!--<script href="{{ asset('js/app.js') }}" type="text/javascript"></script>-->
+        @show
 </body>
 </html>

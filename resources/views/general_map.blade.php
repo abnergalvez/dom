@@ -15,7 +15,8 @@
 		                <i class="fa fa-search" aria-hidden="true"></i> Buscar 
 		            </button>
 		        </span>
-		        <input type="text" class=" form-control" placeholder="Ingresa Dirección..." title="Buscar por Dirección">
+                <input type="hidden" name="place" value="map">
+		        <input type="text" name="address" class=" form-control" placeholder="Ingresa Dirección..." title="Buscar por Dirección">
 		        </div>
 	        </form>
         </div>
@@ -62,6 +63,53 @@
           </div>
         </div>
 
+@endsection
 
-    
+@section('scripts')
+@parent
+    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+    <script src="/assets/plugins/leaflet_awesome/leaflet.awesome-markers.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.js"></script>
+    <script src="/js/SimpleStarRating.js"></script>
+
+<script>
+    var ratings = document.getElementsByClassName('rating');
+    for (var i = 0; i < ratings.length; i++) {
+        var r = new SimpleStarRating(ratings[i]);
+        ratings[i].addEventListener('rate', function(e) {
+            $('#rating_total').html(e.detail);
+            $('#rating_input').val(e.detail);
+            console.log('Rating: ' + e.detail);
+        });
+    }
+
+    map2 = new L.map('map');
+    var osmUrl='http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png';
+    var osmAttrib='Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
+    var osm = new L.TileLayer(osmUrl, {minZoom: 1, maxZoom: 20, attribution: osmAttrib});
+    map2.setView(new L.LatLng(-34.1593915,-70.7738044),12);
+    map2.addLayer(osm);
+    @if(isset($prc_y_punto))
+    var data = {!! $prc_y_punto !!};
+    var datalayer = L.geoJson(data ,{
+        onEachFeature: function(feature, featureLayer) {
+            if(feature.properties.zona_prc){
+                featureLayer.bindPopup(feature.properties.zona_prc +'<br>'+feature.properties.descrip+'<br><br><button class="btn btn-success btn-sm" onclick="groundDetails(\''+feature.properties.zona_prc+'\');"> Ver Detalle de Suelos </button>');
+            }
+            else{
+                featureLayer.bindPopup('No existen datos en esta zona');
+            }
+        }
+    }).addTo(map2);
+    map2.fitBounds(datalayer.getBounds());
+    @else
+    alert('{{ $message }}');
+    @endif
+
+    map2._handlers.forEach(function(handler) {
+        handler.disable();
+    });
+
+</script>
+
 @endsection
