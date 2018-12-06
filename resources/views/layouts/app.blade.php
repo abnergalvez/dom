@@ -17,7 +17,7 @@
      height: 100%;
 }
 body {
-    background-color: #FF9900;
+    background-color: white;
     height: 100%;
     margin-top: 0px;
 }
