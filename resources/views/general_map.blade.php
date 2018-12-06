@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-		<div id="map" style="width:auto;height:500px;border:1px solid gray;margin-bottom:20px;position: relative;">
+		<div id="map" style="width:100%;height:100%;border:1px solid gray;margin:0px;position: absolute;">
             <div class="col-md-12" style="position: absolute;up: 10px;z-index:1000;text-align: center;width: 100%;background: white;">  
                 <div class="navbar-header " style="">  
                     <strong>Plan Regulador Comunal</strong>

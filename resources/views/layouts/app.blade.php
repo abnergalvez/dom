@@ -12,45 +12,23 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="/css/SimpleStarRating.css">
+    <style>
+        html {
+     height: 100%;
+}
+body {
+    background-color: #FF9900;
+    height: 100%;
+    margin-top: 0px;
+}
+.container{
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+}
+</style>
 </head>
 <body>
-    <div id="app">
-        <!--<nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">         
-                   <img  class="pull-left" src="/img/munilogo.png" alt="" style="height: 50px;margin-right: 10px;">&nbsp;&nbsp;&nbsp;
-                    <a class="navbar-brand" href="{{ url('/') }}"> Plan Regulador Comunal</a>
-                </div>
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        @guest
-                        @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>-->
-
+    <div id="app" >
         @yield('content')
     </div>
 @section('scripts')
