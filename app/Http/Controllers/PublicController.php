@@ -33,11 +33,19 @@ class PublicController extends Controller
 				return view('general_map')->with('prc_y_punto', json_encode($json->response));
 	       	}
        	}
+
+       		
+
     }
 
     public function ratingComment(Request $request)
     {
     	$comment = \App\Comment::create($request->all());
-    	return redirect('/');
+    	return redirect('/buscar_prc');
+    }
+
+    public function firstMap()
+    {
+    	return view('general_map');
     }
 }

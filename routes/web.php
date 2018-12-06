@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
+Route::get('/buscar_prc','PublicController@firstMap')->name('first_map');
 Route::post('/buscar_prc','PublicController@searchMap')->name('seachmap');
 Route::post('/rating_comment','PublicController@ratingComment')->name('rating_comment');
 Route::get('/home', 'HomeController@index')->name('home');
