@@ -39,6 +39,20 @@
                         </div>
                       </div>
                     </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="fileinput fileinput-new text-left" data-provides="fileinput">
+                         <div class="fileinput-preview fileinput-exists thumbnail img-raised"></div>
+                         <div>
+                          <label class="bmd-label-floating">Documentos Asociado</label>
+                            <span class="btn btn-raised btn-round btn-primary btn-file">
+                               <input type="file" name="..." />
+                            </span>
+                         </div>
+                      </div>
+                    </div>
+                    </div>
+
                     <button type="submit" class="btn btn-success pull-right">Crear</button>
                     <div class="clearfix"></div>
                   </form>

@@ -16,9 +16,10 @@ class CreateAreasTable extends Migration
         Schema::create('areas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('code');
-            $table->text('description');
-            $table->longText('ground_allowed');
-            $table->longText('ground_not_allowed');
+            $table->text('description')->nullable();
+            $table->longText('ground_allowed')->nullable();
+            $table->longText('ground_not_allowed')->nullable();
+            $table->string('path')->nullable();
             $table->timestamps();
         });
     }
