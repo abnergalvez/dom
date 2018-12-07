@@ -41,12 +41,12 @@
                               </td>
 	                          	<td>
 	                          		<form  class="pull-right" action="/areas/{{ $area->id }}" method="post" onSubmit="if(!confirm('Estas seguro de eliminar la zona')){return false;}" >
-							          	<input type="hidden" name="_method" value="delete">
-							          	<input type="hidden" name="_token" value="{{ csrf_token() }}">
-							          	<button class="btn btn-sm btn-danger pull-right" type="submit" title="Eliminar" style="float:left;">
-							            	<i class="material-icons">delete</i>
-							          	</button>
-							        </form>
+        							          	<input type="hidden" name="_method" value="delete">
+        							          	<input type="hidden" name="_token" value="{{ csrf_token() }}">
+        							          	<button class="btn btn-sm btn-danger pull-right" type="submit" title="Eliminar" style="float:left;">
+        							            	<i class="material-icons">delete</i>
+        							          	</button>
+        							        </form>
 	                          		<a href="/areas/{{ $area->id }}/edit" class="btn btn-sm btn-info pull-right" title="Editar"><i class="material-icons">edit</i></a>
 	                          		<a href="/areas/{{ $area->id }}/show" class="btn btn-sm btn-default pull-right" title="Ver Detalles"><i class="material-icons">remove_red_eye</i></a>
 

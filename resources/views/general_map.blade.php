@@ -15,13 +15,14 @@
             <form action="{{ route('seachmap') }}" method="POST" class="col-md-12">
                 {{ csrf_field() }}
                 <div class="input-group">
-                <span class="input-group-btn">
-                    <button class="btn btn-primary" type="submit" title="Buscar por Dirección">
-                        <i class="fa fa-search" aria-hidden="true"></i> 
-                    </button>
-                </span>
+
                 <input type="hidden" name="place" value="map">
                 <input type="text" name="address" class=" form-control" placeholder="Ingresa direccion a buscar" title="Buscar por Dirección">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="submit" title="Buscar por Dirección">
+                        <i class="fa fa-search"></i>  Buscar
+                    </button>
+                </span>
                 </div>
             </form>
             <div class="col-md-12">
@@ -114,7 +115,7 @@
     var chagedPos = ev.target.getLatLng();
     //this.bindPopup(chagedPos.toString()).openPopup();
     this.bindPopup('Aqui estas!').openPopup();
-
+    searchPoligon(chagedPos.lat,chagedPos.lng);
 });
    /** map2._handlers.forEach(function(handler) {
         handler.disable();
@@ -128,6 +129,17 @@
     
     container.style.position = 'absolute';
     container.style.top = containerTop;
+}
+
+function searchPoligon(latitud,longitud){
+    console.log(latitud+','+longitud);
+    $.ajax({
+        url:"http://209.97.156.75:3000/polygons/loc/"+longitud+","+latitud+"",
+        method: 'GET',
+        success: function(data){
+            map2.setView(new L.LatLng(latitude,longitude),10);
+        }
+    });
 }
 
 setZoomPosition();
