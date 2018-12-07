@@ -22,6 +22,7 @@
                         		<th>ID</th>
                         		<th>Codigo</th>
                         		<th>Descripcion</th>
+                            <th>Documento</th>
                         		<th class="text-right">Acciones</th>
                         	</tr>
  		                </thead>
@@ -31,6 +32,13 @@
 	                          	<td>{{ $area->id }}</td>
 	                          	<td>{{ $area->code }}</td>
 	                          	<td>{{ $area->description }}</td>
+                              <td>
+                                @if($area->path)
+                                <a href="{{ Storage::url($area->path) }}" target="_blank" type="button" class="btn btn-info btn-xs" data-toggle="tooltip" data-placement="top" title="{{$area->name}}"><i class="fa fa-file-text-o" aria-hidden="true"></i>
+                                </a>
+                                @endif
+
+                              </td>
 	                          	<td>
 	                          		<form  class="pull-right" action="/areas/{{ $area->id }}" method="post" onSubmit="if(!confirm('Estas seguro de eliminar la zona')){return false;}" >
 							          	<input type="hidden" name="_method" value="delete">

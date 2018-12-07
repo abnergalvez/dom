@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Area extends Model
 {
     protected $fillable = [
-        'code', 'description','ground_allowed','ground_not_allowed'
+        'code', 'description','ground_allowed','ground_not_allowed','path'
     ];
 
     public function polygons()

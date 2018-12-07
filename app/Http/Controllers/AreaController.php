@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Area;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Filesystem\Filesystem;
 
 class AreaController extends Controller
 {
@@ -20,6 +22,10 @@ class AreaController extends Controller
 
     public function store(Request $request)
     {
+        ini_set('memory_limit','256M');
+        $extension = $request->file('document')->getClientOriginalExtension();
+        $path = $request->file('document')->storeAs('public/documents',$request->code.'.'.$extension);
+        $request->request->add(['path' => $path]);
         $area = \App\Area::create($request->all());
         return redirect('/areas');
     }
@@ -37,6 +43,15 @@ class AreaController extends Controller
 
     public function update(Request $request, Area $area)
     {
+        ini_set('memory_limit','256M');
+
+        if ($area->path){
+            Storage::delete($area->path);
+        }
+
+        $extension = $request->file('document')->getClientOriginalExtension();
+        $path = $request->file('document')->storeAs('public/documents',$request->code.'.'.$extension);
+        $request->request->add(['path' => $path]);
         $area->update($request->all());
         return redirect('/areas');
     }

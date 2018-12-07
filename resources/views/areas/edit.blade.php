@@ -9,7 +9,7 @@
                   <h4 class="card-title">Crear Nuevo</h4>
                 </div>
                 <div class="card-body">
-                  <form action="/areas/{{ $area->id }}" method="POST">
+                  <form action="/areas/{{ $area->id }}" method="POST" enctype="multipart/form-data">
                   	  <input type="hidden" name="_method" value="put">
      					{{ csrf_field() }}
                     <div class="row">
@@ -39,6 +39,22 @@
                           <textarea class="form-control" rows="5" name="ground_not_allowed">{{ $area->ground_not_allowed }}</textarea>
                         </div>
                       </div>
+                    </div>
+                    <div class="row">
+                    <div class="col-md-12">
+                      <div class="fileinput fileinput-new text-left" data-provides="fileinput">
+                         <div class="fileinput-preview fileinput-exists thumbnail img-raised"></div>
+                         <div>
+                          <label class="bmd-label-floating">Documento Asociado</label>
+                          <br>
+                          <small>(Solo si se desea cambiar)</small>
+                            <span class="btn btn-raised btn-round btn-primary btn-file">
+                               <input type="file" name="document" />
+                            </span>
+
+                         </div>
+                      </div>
+                    </div>
                     </div>
                     <button type="submit" class="btn btn-success pull-right">Actualizar</button>
                     <div class="clearfix"></div>

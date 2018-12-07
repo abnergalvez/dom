@@ -9,7 +9,7 @@
                   <h4 class="card-title">Crear Nuevo</h4>
                 </div>
                 <div class="card-body">
-                  <form action="/areas" method="POST">
+                  <form action="/areas" method="POST" enctype="multipart/form-data">
                   	{{ csrf_field() }}
                     <div class="row">
                       <div class="col-md-2">
@@ -44,9 +44,9 @@
                       <div class="fileinput fileinput-new text-left" data-provides="fileinput">
                          <div class="fileinput-preview fileinput-exists thumbnail img-raised"></div>
                          <div>
-                          <label class="bmd-label-floating">Documentos Asociado</label>
+                          <label class="bmd-label-floating">Documento Asociado</label>
                             <span class="btn btn-raised btn-round btn-primary btn-file">
-                               <input type="file" name="..." />
+                               <input type="file" name="document" />
                             </span>
                          </div>
                       </div>
