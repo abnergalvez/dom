@@ -71,6 +71,7 @@
     <script src="/js/SimpleStarRating.js"></script>
 
 <script>
+    var datalayer;
     var ratings = document.getElementsByClassName('rating');
     for (var i = 0; i < ratings.length; i++) {
         var r = new SimpleStarRating(ratings[i]);
@@ -112,6 +113,8 @@
 
     var marker = L.marker([-34.169581,-70.740136],{draggable: true}).addTo(map2).bindPopup('Mueve para obtener el Plan Regulador').openPopup();
     marker.on("dragend", function(ev) {
+    
+  
     var chagedPos = ev.target.getLatLng();
     //this.bindPopup(chagedPos.toString()).openPopup();
     this.bindPopup('Aqui estas!').openPopup();
@@ -137,9 +140,32 @@ function searchPoligon(latitud,longitud){
         url:"http://209.97.156.75:3000/polygons/loc/"+longitud+","+latitud+"",
         method: 'GET',
         success: function(data){
-            map2.setView(new L.LatLng(latitude,longitude),10);
+            if(data.response == null){
+                marker.bindPopup('No existen planes en este punto!').openPopup();
+            }else{
+                if(datalayer){
+                    datalayer.clearLayers();
+                }
+                datalayer = L.geoJson(data.response ,{
+                onEachFeature: function(feature, featureLayer) {
+                    if(feature.properties.ZONA_PRC){
+                        featureLayer.bindPopup(feature.properties.ZONA_PRC +'<br>'+feature.properties.DESCRIP+'<br><br><button class="btn btn-success btn-sm" onclick="groundDetails(\''+feature.properties.ZONA_PRC+'\');"> Ver Detalle de Suelos </button>');
+                    }
+                    else{
+                        featureLayer.bindPopup('No existen datos en esta zona');
+                    }
+                }
+             }).addTo(map2);
+            map2.setView(new L.LatLng(latitud,longitud),17);
+            marker.bindPopup('Haz clic dentro de la zona traslucida para mas informacion!').openPopup();
+            }
+           
         }
     });
+}
+
+function seachAddress(address){
+
 }
 
 setZoomPosition();
