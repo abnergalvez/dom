@@ -60,12 +60,17 @@
                          <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">ZONA : <span class="label label-primary" id="area_name"></span></h4>
+        <a id="link_document" href="" target="_blank">Ver Documento <i class="fa fa-file-text-o" aria-hidden="true"></i> </a>
       </div>
               <div class="modal-body">
-                    <h4>Suelos Permitidos</h4>
-                    <span id="ground_allowed"></span>
-                    <h4>Suelos No Permitidos</h4>
-                    <span id="ground_not_allowed"></span>
+                    <h4><strong>Suelos Permitidos</strong></h4>
+                    <span id="ground_allowed" style="font-size: 13px;">
+                        
+                    </span>
+                    <h4><strong>Suelos No Permitidos</strong></h4>
+                    <span id="ground_not_allowed" style="font-size: 13px;">
+                        
+                    </span>
               </div>  
             </div>
           </div>

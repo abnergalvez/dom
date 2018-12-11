@@ -50,6 +50,8 @@ body {
                 $('#ground_allowed').html(data.ground_allowed);
                 $('#ground_not_allowed').html(data.ground_not_allowed);
                 $('#suelos').modal('show');
+                var path = data.path;
+                $('#link_document').attr('href',path.replace('public','storage'));
                 }
             }
             });
