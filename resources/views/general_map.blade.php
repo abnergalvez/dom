@@ -69,7 +69,6 @@
     <script src="/assets/plugins/leaflet_awesome/leaflet.awesome-markers.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.js"></script>
     <script src="/js/SimpleStarRating.js"></script>
-
 <script>
     var datalayer;
     var ratings = document.getElementsByClassName('rating');
@@ -83,8 +82,8 @@
     }
 
     map2 = new L.map('map').on({
-    'resize': setZoomPosition,
-    'ready': setZoomPosition
+        'resize': setZoomPosition,
+        'ready': setZoomPosition
     });
 
     var osmUrl='http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png';
@@ -113,40 +112,43 @@
 
     var marker = L.marker([-34.169581,-70.740136],{draggable: true}).addTo(map2).bindPopup('Mueve para obtener el Plan Regulador').openPopup();
     marker.on("dragend", function(ev) {
-    
-  
-    var chagedPos = ev.target.getLatLng();
-    //this.bindPopup(chagedPos.toString()).openPopup();
-    this.bindPopup('Aqui estas!').openPopup();
-    searchPoligon(chagedPos.lat,chagedPos.lng);
-});
+        var chagedPos = ev.target.getLatLng();
+        //this.bindPopup(chagedPos.toString()).openPopup();
+        this.bindPopup('Aqui estas!').openPopup();
+        searchPoligon(chagedPos);
+    });
    /** map2._handlers.forEach(function(handler) {
         handler.disable();
     }); **/
 
-    function setZoomPosition () {
-    var mapHalfHeight = map2.getSize().y / 6,
-        container = map2.zoomControl.getContainer(),
-        containerHalfHeight = parseInt(container.offsetHeight / 2),
-        containerTop = mapHalfHeight - containerHalfHeight + 'px';
+function setZoomPosition () {
+    var mapHalfHeight = map2.getSize().y / 6;
+    var container = map2.zoomControl.getContainer();
+    var containerHalfHeight = parseInt(container.offsetHeight / 2);
+    var containerTop = mapHalfHeight - containerHalfHeight + 'px';
     
     container.style.position = 'absolute';
     container.style.top = containerTop;
 }
 
-function searchPoligon(latitud,longitud){
-    console.log(latitud+','+longitud);
+function searchPoligon(loc) {
     $.ajax({
-        url:"http://209.97.156.75:3000/polygons/loc/"+longitud+","+latitud+"",
+        url: "http://209.97.156.75:3000/polygons/loc/" + loc.lng + "," + loc.lat,
         method: 'GET',
-        success: function(data){
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*"
+        },
+        success: function(datajson){
+            console.log(datajson);
+            var data = datajson;    
             if(data.response == null){
                 marker.bindPopup('No existen planes en este punto!').openPopup();
             }else{
                 if(datalayer){
                     datalayer.clearLayers();
                 }
-                datalayer = L.geoJson(data.response ,{
+                datalayer = L.geoJson(data.response, {
                 onEachFeature: function(feature, featureLayer) {
                     if(feature.properties.ZONA_PRC){
                         featureLayer.bindPopup(feature.properties.ZONA_PRC +'<br>'+feature.properties.DESCRIP+'<br><br><button class="btn btn-success btn-sm" onclick="groundDetails(\''+feature.properties.ZONA_PRC+'\');"> Ver Detalle de Suelos </button>');
@@ -156,16 +158,15 @@ function searchPoligon(latitud,longitud){
                     }
                 }
              }).addTo(map2);
-            map2.setView(new L.LatLng(latitud,longitud),17);
+            map2.setView(new L.LatLng(loc.lat,loc.lng),17);
             marker.bindPopup('Haz clic dentro de la zona traslucida para mas informacion!').openPopup();
             }
-           
         }
     });
 }
 
-function seachAddress(address){
-
+function seachAddress(address) {
+    //
 }
 
 setZoomPosition();
