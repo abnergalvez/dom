@@ -28,10 +28,6 @@ body {
 </style>
 </head>
 <body>
-<?php
-      header('Origin:209.97.156.75');
-      header('Access-Control-Allow-Origin:*');
-?>
     <div id="app" >
         @yield('content')
     </div>

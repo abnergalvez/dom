@@ -12,16 +12,26 @@
             </div>
 
             <div class="" style="position: absolute;bottom: 10px;z-index:1000;margin-right: 5px;width: 100%" >
-            <form action="{{ route('seachmap') }}" method="POST" class="col-md-12">
+            <!--<form action="{{ route('seachmap') }}" method="POST" class="col-md-12">
                 {{ csrf_field() }}
                 <div class="input-group">
 
                 <input type="hidden" name="place" value="map">
-                <input type="text" name="address" class=" form-control" placeholder="Ingresa direccion a buscar" title="Buscar por Dirección">
+                <input type="text" name="address" id="address" class=" form-control" placeholder="Ingresa direccion a buscar" title="Buscar por Dirección">
                 <span class="input-group-btn">
                     <button class="btn btn-primary" type="submit" title="Buscar por Dirección">
                         <i class="fa fa-search"></i>  Buscar
                     </button>
+                </span>
+                </div>
+            </form>-->
+            <form  class="col-md-12">
+                <div class="input-group">
+                <input type="text" name="address" id="address" class=" form-control" placeholder="Ingresa direccion a buscar" title="Buscar por Dirección">
+                <span class="input-group-btn">
+                    <a href="javascript:seachAddress($('#address').val())" class="btn btn-primary" title="Buscar por Dirección">
+                        <i class="fa fa-search"></i>  Buscar
+                    </a>
                 </span>
                 </div>
             </form>
@@ -140,7 +150,6 @@ function searchPoligon(loc) {
           "Access-Control-Allow-Origin": "*"
         },
         success: function(datajson){
-            console.log(datajson);
             var data = datajson;    
             if(data.response == null){
                 marker.bindPopup('No existen planes en este punto!').openPopup();
@@ -158,7 +167,7 @@ function searchPoligon(loc) {
                     }
                 }
              }).addTo(map2);
-            map2.setView(new L.LatLng(loc.lat,loc.lng),17);
+            map2.setView(new L.LatLng(loc.lat,loc.lng),14);
             marker.bindPopup('Haz clic dentro de la zona traslucida para mas informacion!').openPopup();
             }
         }
@@ -166,7 +175,38 @@ function searchPoligon(loc) {
 }
 
 function seachAddress(address) {
-    //
+        $.ajax({
+        url: "http://209.97.156.75:3000/addresses/" + address +", Rancagua",
+        method: 'GET',
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*"
+        },
+        success: function(datajson){
+            var data = datajson;    
+            if(data.response == null){
+                marker.bindPopup('No es posible resolver la Direccion Ingresada!').openPopup();
+            }else{
+                if(datalayer){
+                    datalayer.clearLayers();
+                }         
+               datalayer = L.geoJson(data.response.features[1], {
+                onEachFeature: function(feature, featureLayer) {
+                    if(feature.properties.ZONA_PRC){
+                        featureLayer.bindPopup(feature.properties.ZONA_PRC +'<br>'+feature.properties.DESCRIP+'<br><br><button class="btn btn-success btn-sm" onclick="groundDetails(\''+feature.properties.ZONA_PRC+'\');"> Ver Detalle de Suelos </button>');
+                    }
+                    else{
+                        featureLayer.bindPopup('No existen datos en esta zona');
+                    }
+                }
+             }).addTo(map2);
+            marker.setLatLng([data.response.features[0].geometry.coordinates[1] , data.response.features[0].geometry.coordinates[0]]);
+            
+            map2.setView(new L.LatLng(data.response.features[0].geometry.coordinates[1] , data.response.features[0].geometry.coordinates[0]),14);
+            marker.bindPopup('Haz clic dentro de la zona traslucida para mas informacion!').openPopup();
+            }
+        }
+    });
 }
 
 setZoomPosition();
