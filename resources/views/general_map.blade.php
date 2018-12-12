@@ -11,7 +11,7 @@
                 </div>
             </div>
 
-            <div class="" style="position: absolute;bottom: 10px;z-index:1000;margin-right: 5px;width: 100%" >
+            <div class="" style="position: fixed;bottom: 10px;z-index:401;margin-right: 5px;width: 100%" >
 
             <form  class="col-md-12">
                 <div class="input-group">
