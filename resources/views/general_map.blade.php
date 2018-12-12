@@ -12,19 +12,7 @@
             </div>
 
             <div class="" style="position: absolute;bottom: 10px;z-index:1000;margin-right: 5px;width: 100%" >
-            <!--<form action="{{ route('seachmap') }}" method="POST" class="col-md-12">
-                {{ csrf_field() }}
-                <div class="input-group">
 
-                <input type="hidden" name="place" value="map">
-                <input type="text" name="address" id="address" class=" form-control" placeholder="Ingresa direccion a buscar" title="Buscar por Dirección">
-                <span class="input-group-btn">
-                    <button class="btn btn-primary" type="submit" title="Buscar por Dirección">
-                        <i class="fa fa-search"></i>  Buscar
-                    </button>
-                </span>
-                </div>
-            </form>-->
             <form  class="col-md-12">
                 <div class="input-group">
                 <input type="text" name="address" id="address" class=" form-control" placeholder="Ingresa direccion a buscar" title="Buscar por Dirección">
@@ -38,7 +26,7 @@
             <div class="col-md-12">
             <form action="/rating_comment" method="post" class="" style="background: white;padding: 5px;margin-top:5px;">
             {{ csrf_field() }}
-            Danos tu opinion! ¿Que tan util fue la información?<br><span class="rating"></span>  <strong id="rating_total" style="font-size: 15px;"></strong>  / 5
+            ¿Que tan util fue la información?<br><span class="rating"></span>  <strong id="rating_total" style="font-size: 15px;"></strong>  / 5
             <div class="input-group pull-right" >
                 <button class="btn btn-primary btn-xs rigth" type="submit"> Enviar</button>
             </div>
