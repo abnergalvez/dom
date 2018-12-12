@@ -57,7 +57,6 @@ body {
             });
         }
         </script>
-        <!--<script href="{{ asset('js/app.js') }}" type="text/javascript"></script>-->
         @show
 </body>
 </html>
