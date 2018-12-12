@@ -125,6 +125,11 @@
     @endif
     @endif
 
+    map2.on('dblclick', function (e){
+        //alert(e.latlng.lat);
+        marker.setLatLng([ e.latlng.lat, e.latlng.lng]);
+        searchPoligon(e.latlng);
+    });
     var marker = L.marker([-34.169581,-70.740136],{draggable: true}).addTo(map2).bindPopup('Mueve para obtener el Plan Regulador').openPopup();
     marker.on("dragend", function(ev) {
         var chagedPos = ev.target.getLatLng();
