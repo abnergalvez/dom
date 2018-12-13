@@ -10,16 +10,15 @@
                    <img  src="/img/munilogo.png" alt="" style="height: 40px;margin-right: 10px;">
                 </div>
             </div>
-            <div class="" style="position: fixed;bottom: 10px;z-index:1401;margin-right: 5px;width: 100%;height:170px;" >
+        </div>
 
-
-
+        <div class="" style="position: fixed;bottom: 10px;z-index:1401;margin-right: 5px;width: 100%;height:170px;" >
 
                 <div class="col-md-12">
-                                            <input style="width: 90%;height:30px; float: left;" type="text" name="address" id="address" class="form-control" placeholder="Ingresa direccion a buscar" title="Buscar por Dirección">
-                            <a style="width: 10%;height:30px;float: left;" href="javascript:seachAddress($('#address').val())" class="btn btn-primary" title="Buscar por Dirección">
-                                <i class="fa fa-search"></i>
-                            </a>
+                    <input style="width: 90%;height:30px; float: left;" autofocus type="text" name="address" id="address" class="form-control" placeholder="Ingresa direccion a buscar" title="Buscar por Dirección">
+                    <a style="width: 10%;height:30px;float: left;" href="javascript:seachAddress($('#address').val())" class="btn btn-primary" title="Buscar por Dirección">
+                        <i class="fa fa-search"></i>
+                    </a>
                     <form action="/rating_comment" method="post" class="" style="background: white;padding: 5px;margin-top:5px;">
                         {{ csrf_field() }}
                         ¿Que tan util fue la información?<br><span class="rating"></span>  <strong id="rating_total" style="font-size: 15px;"></strong>  / 5
@@ -32,8 +31,8 @@
 
                     </form>
                 </div>
-            </div>
         </div>
+
     </div>
 
     <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" id="suelos">
