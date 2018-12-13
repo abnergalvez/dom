@@ -10,6 +10,7 @@
                    <img  src="/img/munilogo.png" alt="" style="height: 40px;margin-right: 10px;"><br>
                 </div>
                 <div class="alert alert-danger msg col-md-12" role="alert" style="display:none;font-weight: bold;"></div>
+                <div class="alert alert-success msg_success col-md-12" role="alert" style="display:none;font-weight: bold;"></div>
             </div>
         </div>
 
@@ -105,7 +106,7 @@
     });
 
     function setZoomPosition () {
-        var mapHalfHeight = map2.getSize().y / 2;
+        var mapHalfHeight = map2.getSize().y / 4;
         var container = map2.zoomControl.getContainer();
         var containerHalfHeight = parseInt(container.offsetHeight / 2);
         var containerTop = mapHalfHeight - containerHalfHeight + 'px';
@@ -191,6 +192,14 @@
             }  
         });
     }
+    @if(Session::has('message'))
+        $('.msg_success').html('{{ Session::get('message') }}');
+        $('.msg_success').css('display','block');
+        setTimeout(function(){
+            $('.msg_success').css('display','none');
+            $('.msg_success').html('');
+        }, 3000);
+    @endif
     setZoomPosition();
 
     function msgAlert(msg){
@@ -199,7 +208,7 @@
         setTimeout(function(){
             $('.msg').css('display','none');
             $('.msg').html('');
-        }, 2000);
+        }, 3000);
     }
 </script>
 @endsection

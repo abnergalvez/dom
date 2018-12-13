@@ -41,6 +41,7 @@ class PublicController extends Controller
     public function ratingComment(Request $request)
     {
     	$comment = \App\Comment::create($request->all());
+        $request->session()->flash('message', 'Gracias por tu comentario!');
     	return redirect('/buscar_prc');
     }
 
