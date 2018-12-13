@@ -7,12 +7,13 @@
             <div class="col-md-12" style="position: absolute;up: 10px;z-index:1000;text-align: center;width: 100%;background: white;">  
                 <div class="navbar-header " style="">  
                     <strong>Plan Regulador Comunal</strong>
-                   <img  src="/img/munilogo.png" alt="" style="height: 40px;margin-right: 10px;">
+                   <img  src="/img/munilogo.png" alt="" style="height: 40px;margin-right: 10px;"><br>
                 </div>
+                <div class="alert alert-danger msg col-md-12" role="alert" style="display:none;font-weight: bold;"></div>
             </div>
         </div>
 
-        <div class="" style="position: fixed;bottom: 10px;z-index:1401;margin-right: 5px;width: 100%;height:170px;" >
+        <div class="" style="position: fixed;bottom: 10px;z-index:401;margin-right: 5px;width: 100%;height:150px;" >
                 <form  class="col-md-12">
                     <div class="input-group">
                         <input type="text" name="address" autofocus id="address" class=" form-control" placeholder="Ingresa direccion a buscar" title="Buscar por Dirección">
@@ -26,14 +27,13 @@
                 <div class="col-md-12">
                     <form action="/rating_comment" method="post" class="" style="background: white;padding: 5px;margin-top:5px;">
                         {{ csrf_field() }}
-                        ¿Que tan util fue la información?<br><span class="rating"></span>  <strong id="rating_total" style="font-size: 15px;"></strong>  / 5
+                        <small><strong>¿Que tan util fue la información?</strong></small><br>
+                        <span class="rating"></span>  <strong id="rating_total" style="font-size: 15px;"></strong>  / 5
                         <div class="input-group pull-right" >
                             <button class="btn btn-primary btn-xs rigth" type="submit"> Enviar</button>
                         </div>
                         <input type="hidden" name="rating" id="rating_input" value="0" required>
-
                             <textarea name="description" class="form-control"  rows="1" placeholder="Comentanos..." required></textarea>
-
                     </form>
                 </div>
         </div>
@@ -105,7 +105,7 @@
     });
 
     function setZoomPosition () {
-        var mapHalfHeight = map2.getSize().y / 6;
+        var mapHalfHeight = map2.getSize().y / 2;
         var container = map2.zoomControl.getContainer();
         var containerHalfHeight = parseInt(container.offsetHeight / 2);
         var containerTop = mapHalfHeight - containerHalfHeight + 'px';
@@ -125,6 +125,7 @@
                 var data = datajson;    
                 if(data.response == null){
                     marker.bindPopup('No existen planes en este punto!').openPopup();
+                    msgAlert('No existen planes en este punto!');
                 }else{
                     if(datalayer){
                         datalayer.clearLayers();
@@ -137,12 +138,16 @@
                         }
                         else{
                             featureLayer.bindPopup('No existen datos en esta zona');
+                            msgAlert('No existen datos en esta zona!');
                         }
                     }
                  }).addTo(map2);
                 map2.setView(new L.LatLng(loc.lat,loc.lng),14);
                 }
-            }
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+            //alert("Status: " + textStatus); alert("Error: " + errorThrown); 
+            }  
         });
     }
 
@@ -155,9 +160,9 @@
               "Access-Control-Allow-Origin": "*"
             },
             success: function(datajson){
-                var data = datajson;    
-                if(data.response == null){
-                    marker.bindPopup('No es posible resolver la dirección ingresada!').openPopup();
+                var data = datajson;  
+                if(data.response == null || data.response == 'address not found'){
+                    marker.bindPopup('No es posible resolver la dirección ingresada!').openPopup();  
                 }else{
                     if(datalayer){
                         datalayer.clearLayers();
@@ -170,6 +175,7 @@
                         }
                         else{
                             featureLayer.bindPopup('No existen datos en esta zona!');
+                            msgAlert('No existen datos en esta zona!');
                         }
                     }
                  }).addTo(map2);
@@ -177,9 +183,23 @@
                 map2.setView(new L.LatLng(data.response.features[0].geometry.coordinates[1] , data.response.features[0].geometry.coordinates[0]),14);
 
                 }
-            }
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                if(errorThrown == 'Not Found'){
+                    msgAlert('No es posible resolver la dirección ingresada!');
+                } 
+            }  
         });
     }
-setZoomPosition();
+    setZoomPosition();
+
+    function msgAlert(msg){
+        $('.msg').html(msg);
+        $('.msg').css('display','block');
+        setTimeout(function(){
+            $('.msg').css('display','none');
+            $('.msg').html('');
+        }, 2000);
+    }
 </script>
 @endsection
