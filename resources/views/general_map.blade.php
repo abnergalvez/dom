@@ -154,7 +154,7 @@
 
     function seachAddress(address) {
             $.ajax({
-            url: "http://mibarrioprc.cl:3000/addresses/" + address +", Rancagua",
+            url: "https://mibarrioprc.cl:3000/addresses/" + address +", Rancagua",
             method: 'GET',
             headers: {
               "Content-Type": "application/json",
