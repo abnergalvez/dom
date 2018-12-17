@@ -86,7 +86,7 @@
         'ready': setZoomPosition
     });
 
-    var osmUrl='http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png';
+    var osmUrl='https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png';
     var osmAttrib='Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
     var osm = new L.TileLayer(osmUrl, {minZoom: 1, maxZoom: 20, attribution: osmAttrib});
     map2.setView(new L.LatLng(-34.169581,-70.740136),12);
@@ -116,7 +116,7 @@
 
     function searchPoligon(loc) {
         $.ajax({
-            url: "http://mibarrioprc.cl:3000/polygons/loc/" + loc.lng + "," + loc.lat,
+            url: "https://mibarrioprc.cl:3000/polygons/loc/" + loc.lng + "," + loc.lat,
             method: 'GET',
             headers: {
               "Content-Type": "application/json",
