@@ -116,7 +116,7 @@
 
     function searchPoligon(loc) {
         $.ajax({
-            url: "https://mibarrioprc.cl:3000/polygons/loc/" + loc.lng + "," + loc.lat,
+            url: "http://mibarrioprc.cl:3000/polygons/loc/" + loc.lng + "," + loc.lat,
             method: 'GET',
             headers: {
               "Content-Type": "application/json",
@@ -154,7 +154,7 @@
 
     function seachAddress(address) {
             $.ajax({
-            url: "https://mibarrioprc.cl:3000/addresses/" + address +", Rancagua",
+            url: "http://mibarrioprc.cl:3000/addresses/" + address +", Rancagua",
             method: 'GET',
             headers: {
               "Content-Type": "application/json",
