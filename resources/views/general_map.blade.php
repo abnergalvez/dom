@@ -66,9 +66,9 @@
 @section('scripts')
 @parent
     <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
-    <script src="/assets/plugins/leaflet_awesome/leaflet.awesome-markers.js"></script>
+    <script src="{{ asset('/assets/plugins/leaflet_awesome/leaflet.awesome-markers.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.js"></script>
-    <script src="/js/SimpleStarRating.js"></script>
+    <script src="{{ asset('/js/SimpleStarRating.js') }}"></script>
 <script>
     var datalayer;
     var ratings = document.getElementsByClassName('rating');
@@ -116,7 +116,7 @@
 
     function searchPoligon(loc) {
         $.ajax({
-            url: "http://209.97.156.75:3000/polygons/loc/" + loc.lng + "," + loc.lat,
+            url: "https://209.97.156.75:3000/polygons/loc/" + loc.lng + "," + loc.lat,
             method: 'GET',
             headers: {
               "Content-Type": "application/json",
@@ -154,7 +154,7 @@
 
     function seachAddress(address) {
             $.ajax({
-            url: "http://209.97.156.75:3000/addresses/" + address +", Rancagua",
+            url: "https://209.97.156.75:3000/addresses/" + address +", Rancagua",
             method: 'GET',
             headers: {
               "Content-Type": "application/json",
