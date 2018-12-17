@@ -116,7 +116,7 @@
 
     function searchPoligon(loc) {
         $.ajax({
-            url: "http://209.97.156.75:3000/polygons/loc/" + loc.lng + "," + loc.lat,
+            url: "https://209.97.156.75:3000/polygons/loc/" + loc.lng + "," + loc.lat,
             method: 'GET',
             headers: {
               "Content-Type": "application/json",
@@ -154,7 +154,7 @@
 
     function seachAddress(address) {
             $.ajax({
-            url: "http://209.97.156.75:3000/addresses/" + address +", Rancagua",
+            url: "https://209.97.156.75:3000/addresses/" + address +", Rancagua",
             method: 'GET',
             headers: {
               "Content-Type": "application/json",
