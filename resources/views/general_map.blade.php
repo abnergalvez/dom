@@ -167,22 +167,27 @@
                 }else{
                     if(datalayer){
                         datalayer.clearLayers();
-                    }         
-                   datalayer = L.geoJson(data.response.features[1], {
-                    onEachFeature: function(feature, featureLayer) {
-                        if(feature.properties.ZONA_PRC){
-                            featureLayer.bindPopup('<span style="font-weight: bold;font-size:20px;">'+feature.properties.ZONA_PRC +'</span><br>'+feature.properties.DESCRIP+'<hr><button class="btn btn-success btn-sm" onclick="groundDetails(\''+feature.properties.ZONA_PRC+'\');"> Ver Detalle de Suelos </button>');
-                            marker.bindPopup('<span style="font-weight: bold;font-size:20px;">'+feature.properties.ZONA_PRC +'</span><br>'+feature.properties.DESCRIP+'<hr><button class="btn btn-success btn-sm" onclick="groundDetails(\''+feature.properties.ZONA_PRC+'\');"> Ver Detalle de Suelos </button>').openPopup();
-                        }
-                        else{
-                            featureLayer.bindPopup('No existen datos en esta zona!');
-                            msgAlert('No existen datos en esta zona!');
-                        }
                     }
-                 }).addTo(map2);
-                marker.setLatLng([data.response.features[0].geometry.coordinates[1] , data.response.features[0].geometry.coordinates[0]]);                
-                map2.setView(new L.LatLng(data.response.features[0].geometry.coordinates[1] , data.response.features[0].geometry.coordinates[0]),14);
-
+                    if(data.response.features[0]){
+                        marker.setLatLng([data.response.features[0].geometry.coordinates[1] , data.response.features[0].geometry.coordinates[0]]);                
+                        map2.setView(new L.LatLng(data.response.features[0].geometry.coordinates[1] , data.response.features[0].geometry.coordinates[0]),14);  
+                    }
+                    else if(data.response.features[1]){
+                        datalayer = L.geoJson(data.response.features[1], {
+                            onEachFeature: function(feature, featureLayer) {
+                                if(feature.properties.ZONA_PRC){
+                                    featureLayer.bindPopup('<span style="font-weight: bold;font-size:20px;">'+feature.properties.ZONA_PRC +'</span><br>'+feature.properties.DESCRIP+'<hr><button class="btn btn-success btn-sm" onclick="groundDetails(\''+feature.properties.ZONA_PRC+'\');"> Ver Detalle de Suelos </button>');
+                                    marker.bindPopup('<span style="font-weight: bold;font-size:20px;">'+feature.properties.ZONA_PRC +'</span><br>'+feature.properties.DESCRIP+'<hr><button class="btn btn-success btn-sm" onclick="groundDetails(\''+feature.properties.ZONA_PRC+'\');"> Ver Detalle de Suelos </button>').openPopup();
+                                }
+                                else{
+                                    featureLayer.bindPopup('No existen datos en esta zona!');
+                                    msgAlert('No existen datos en esta zona!');
+                                }
+                            }
+                        }).addTo(map2);
+                    }else{
+                        msgAlert('No es posible resolver la dirección ingresada!');
+                    }
                 }
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) { 
