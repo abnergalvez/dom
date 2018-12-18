@@ -168,11 +168,7 @@
                     if(datalayer){
                         datalayer.clearLayers();
                     }
-                    if(data.response.features[0]){
-                        marker.setLatLng([data.response.features[0].geometry.coordinates[1] , data.response.features[0].geometry.coordinates[0]]);                
-                        map2.setView(new L.LatLng(data.response.features[0].geometry.coordinates[1] , data.response.features[0].geometry.coordinates[0]),14);  
-                    }
-                    else if(data.response.features[1]){
+                    if(data.response.features){
                         datalayer = L.geoJson(data.response.features[1], {
                             onEachFeature: function(feature, featureLayer) {
                                 if(feature.properties.ZONA_PRC){
@@ -185,9 +181,17 @@
                                 }
                             }
                         }).addTo(map2);
-                    }else{
-                        msgAlert('No es posible resolver la dirección ingresada!');
+                        marker.setLatLng([data.response.features[0].geometry.coordinates[1] , data.response.features[0].geometry.coordinates[0]]);                
+                        map2.setView(new L.LatLng(data.response.features[0].geometry.coordinates[1] , data.response.features[0].geometry.coordinates[0]),14); 
                     }
+                if(data.response.geometry.coordinates){
+                    marker.setLatLng([data.response.geometry.coordinates[1] , data.response.geometry.coordinates[0]]);                
+                    map2.setView(new L.LatLng(data.response.geometry.coordinates[1] , data.response.geometry.coordinates[0]),14); 
+                    marker.bindPopup('No hay plan asociado!');
+                    msgAlert('No existe un plan asociado a la direccion!');
+                }        
+
+
                 }
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) { 
