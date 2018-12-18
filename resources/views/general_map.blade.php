@@ -15,7 +15,7 @@
         </div>
 
         <div class="" style="position: fixed;bottom: 10px;z-index:401;margin-right: 5px;width: 100%;height:150px;" >
-                <form  class="col-md-12">
+                <div  class="col-md-12">
                     <div class="input-group">
                         <input type="text" name="address" autofocus id="address" class=" form-control" placeholder="Ingresa direccion a buscar" title="Buscar por Dirección">
                         <span class="input-group-btn">
@@ -24,7 +24,7 @@
                             </a>
                         </span>
                     </div>
-                </form>    
+                </div>    
                 <div class="col-md-12">
                     <form action="/rating_comment" method="post" class="" style="background: white;padding: 5px;margin-top:5px;">
                         {{ csrf_field() }}
